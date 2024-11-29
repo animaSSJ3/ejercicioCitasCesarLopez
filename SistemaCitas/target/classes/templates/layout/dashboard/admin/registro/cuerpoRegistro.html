@@ -1,0 +1,89 @@
+<main th:fragment="cuerpoRegistro" class="content px-3 py-2">
+   <div class="container-fluid">
+      <h3>Citas Agendadas</h3>
+      <br/>
+      <div class="alert alert-danger alert-dismissible fade show"
+         th:if="${errores != null && errores.containsKey('fechaCita')}">
+         <span th:text="${errores.fechaCita}"> </span>
+         <button th:if="${errores!=null}" type="button" class="btn-close"
+            data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div class="alert alert-danger alert-dismissible fade show"
+         th:if="${errores != null && errores.containsKey('horaCita')}">
+         <span th:text="${errores.horaCita}"> </span>
+         <button th:if="${errores!=null}" type="button" class="btn-close"
+            data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div class="alert alert-danger alert-dismissible fade show"
+         th:if="${errores != null && errores.containsKey('idTipoCita')}">
+         <span th:text="${errores.idTipoCita}"> </span>
+         <button th:if="${errores!=null}" type="button" class="btn-close"
+            data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div class="alert alert-danger alert-dismissible fade show"
+         th:if="${errores != null && errores.containsKey('idConsultorio')}">
+         <span th:text="${errores.idConsultorio}"> </span>
+         <button th:if="${errores!=null}" type="button" class="btn-close"
+            data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div th:if="${mensaje!=null}"
+         th:class="'alert alert-'+${clase}+'  alert-dismissible fade show'">
+         <span th:text="${mensaje}"> </span>
+         <button th:if="${mensaje!=null}" type="button" class="btn-close"
+            data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      
+      <form name="form" method="POST" th:object="${datosCitaRegistra}"  class="row gy-12 gx-6 align-items-center"
+         th:action="@{/dashboard-admin/registroCita}">
+         
+         
+          <div class="mb-4 col-sm-12 col-md-12 col-lg-3">
+            <label for="fechaNacimiento" class="form-label">Fecha de cita:</label>
+            <input type="date" class="form-control" th:field="*{fechaCita}"
+               placeholder="Fecha de cita" required="true" />
+         </div>
+         
+         
+         <div class="mb-4 col-sm-12 col-md-12 col-lg-3">
+            <label for="nombre" class="form-label">Hora:</label>
+            <input type="text" class="form-control" th:field="*{horaCita}"
+               required="true" autofocus="true"  />
+         </div>
+
+         
+         <div class="mb-4 col-sm-12 col-md-12 col-lg-3">
+         <label for="idTipoCita" class="form-label">Tipo de cita:</label> 
+         <select th:field="*{idTipoCita}"
+               id="idTipoCita" 
+               class="form-control"
+               required="true">
+               <option value="00">Seleccione una opción</option>
+               <option th:each="ltc:${listaTipoCita}"
+                  th:value="${ltc.codigo}" 
+                  th:text="${ltc.nombre}">
+               </option>
+         </select>
+         </div>
+         
+         <div class="mb-4 col-sm-12 col-md-12 col-lg-3">
+         <label for="idConsultorio" class="form-label">Consultorio:</label> 
+         <select th:field="*{idConsultorio}"
+               id="idConsultorio" 
+               class="form-control"
+               required="true">
+               <option value="00">Seleccione una opción</option>
+               <option th:each="con:${consultorio}"
+                  th:value="${con.codigo}" 
+                  th:text="${con.nombre}">
+               </option>
+         </select>
+         </div>
+         <div class="d-grid gap-2">
+         	<br/>
+         	<br/>
+            <button type="submit" class="btn btn-primary" id="btnCreaCita">Crear</button>
+            <a th:href="@{/dashboard-admin/solicitudes}" class="btn btn-success">Cancelar</a>
+         </div>
+      </form>
+   </div>
+</main>

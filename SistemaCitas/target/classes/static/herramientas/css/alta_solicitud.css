@@ -1,0 +1,6 @@
+#rfcAlta {
+    border-color: red;
+}
+#rfcAlta.ok {
+    border-color: green;
+}
