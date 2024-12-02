@@ -87,7 +87,8 @@ public class Security {
 		                 "/api/v1/paciente",
 		                 "/api/v1/cambios-citas",
 		                 "/api/v1/tipo-consultorio",
-		                 "/api/v1/tipo-cita")
+		                 "/api/v1/tipo-cita",
+		                 "/api/v1/busca-cita")
 				.permitAll()
 				.anyRequest()
 				.authenticated()
@@ -116,7 +117,8 @@ public class Security {
 						                 "/api/v1/paciente",
 						                 "/api/v1/cambios-citas",
 						                 "/api/v1/tipo-consultorio",
-						                 "/api/v1/tipo-cita")
+						                 "/api/v1/tipo-cita",
+						                 "/api/v1/busca-cita")
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
 		
 		return http.build();

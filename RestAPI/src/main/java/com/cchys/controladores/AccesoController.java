@@ -228,7 +228,20 @@ public class AccesoController {
 
 	}
 	
-	
+	@PostMapping("/busca-cita")
+	public ResponseEntity<?> buscCita(@RequestBody Long id) {
+
+		try {
+			
+			return ResponseEntity.ok(this.citasService.buscaId(id));
+			
+		} catch (Exception e) {
+			
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+			
+		}
+
+	}
 	
 
 }

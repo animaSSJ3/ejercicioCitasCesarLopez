@@ -6,6 +6,7 @@ com\cchys\entities\DatosPacienteEntity$DatosPacienteEntityBuilder.class
 com\cchys\entities\dto\login\RegistroUserDTO.class
 com\cchys\entities\DatosClienteEntity.class
 com\cchys\services\PermisosService.class
+com\cchys\services\dto\RestService$12.class
 com\cchys\controllers\UsuarioController.class
 com\cchys\response\AuthResponse.class
 com\cchys\controllers\HomeController.class

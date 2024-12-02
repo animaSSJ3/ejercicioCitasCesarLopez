@@ -263,5 +263,23 @@ public class RestService {
 	}
 	
 	
+	public DatosCitaMedicaResponse buscaCita(String token, Long id) {
+
+		try {
+
+			HttpEntity<Long> entity = new HttpEntity<>(id,this.setHeaders(token));
+			ResponseEntity<DatosCitaMedicaResponse> response = this.restTemplate.exchange(ruta_api + "busca-cita",
+					HttpMethod.POST, entity, new ParameterizedTypeReference<DatosCitaMedicaResponse>() {
+					});
+			return response.getBody();
+
+		} catch (Exception ex) {
+			log.info("Citas Error: " + ex.getMessage());
+			return null;
+		}
+
+	}
+	
+	
 
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cchys.entities.DatosUsuariosEntity;
@@ -208,20 +209,30 @@ public class HomeController {
 
 	}
 	
-	@GetMapping("/eliminar/{id}")
-	public String eliminarContactos(@PathVariable("id") Long id, RedirectAttributes flash, Principal principal) {
+	@PostMapping("/eliminar")
+	public String eliminarContactos(@RequestParam(name = "id") Long id, RedirectAttributes flash, Principal principal) {
 
 		try {
 
+			System.out.println("ID Recibido: " + id);
+			
+			DatosUsuariosEntity usuario = this.usuariosService.buscarPorCorreo(principal.getName(), 1);
+			DatosCitaMedicaResponse citaBusca = this.restService.buscaCita(usuario.getToken(),id);
+			
+			citaBusca.setEstadoCita("CANCELADA");
+			
+			System.out.println("Contacto Actualizado: " + citaBusca);
+			
+			this.restService.actualizaCita(usuario.getToken(),citaBusca);
 
 			flash.addFlashAttribute("clase", "success");
-			flash.addFlashAttribute("mensaje", "Se elimino el contacto exitosamente");
+			flash.addFlashAttribute("mensaje", "Se elimino la cita medica");
 			return "redirect:/dashboard-admin/home";
 
 		} catch (Exception e) {
 			flash.addFlashAttribute("clase", "danger");
-			flash.addFlashAttribute("mensaje", "Error al eliminar el contacto: " + e.getMessage());
-			return "redirect:/dashboard-admin/solicitudes";
+			flash.addFlashAttribute("mensaje", "Error al eliminar la cita: " + e.getMessage());
+			return "redirect:/dashboard-admin/home";
 		}
 
 	}

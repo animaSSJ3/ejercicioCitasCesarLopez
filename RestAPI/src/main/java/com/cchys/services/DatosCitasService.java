@@ -1,6 +1,7 @@
 package com.cchys.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,23 @@ public class DatosCitasService {
 	public DatosCitaMedicaEntity guardar(DatosCitaMedicaEntity entity) {
 		System.out.println("Error: " + entity);
 		return this.repository.save(entity);
+	}
+	
+	public DatosCitaMedicaEntity buscaId(Long id) {
+
+		
+		Optional<DatosCitaMedicaEntity> buscaCita = this.repository.findById(id);
+
+		
+		if (buscaCita.isPresent()) {
+			
+			return buscaCita.get();
+			
+		}else {
+			return null;
+		}
+		
+		
 	}
 
 

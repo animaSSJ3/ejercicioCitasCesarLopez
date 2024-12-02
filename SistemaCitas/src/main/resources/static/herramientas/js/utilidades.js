@@ -1,27 +1,3 @@
-function Delete(id) {
-
-	$.confirm({
-		title: 'Eliminar contacto',
-		content: '¿Desea eliminar al contacto?',
-		animation: 'RotateXR',
-		closeAnimation: 'scale',
-		buttons: {
-			add: {
-				text: 'Aceptar',
-				action: function() {
-					window.location.href = '/dashboard-admin/eliminar/' + id
-				}
-			},
-			cancel: {
-				text: 'Cancelar',
-				action: function() {
-
-				}
-			}
-		}
-	});
-
-}
 
 
 function soloLetrasCurpRfc(e) {
